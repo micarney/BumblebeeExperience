@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+        {% for user in user_data %}
+    <H1>Hello, {{user.name}}</H1>
+        {% endfor %}
+    <a href="/logout">Logout</a>
+    <a href="/">Home</a>
+    <h3>Your Trip Schedule</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Destination</th>
+                <th>Travel Start Date</th>
+                <th>Travel End Date</th>
+                <th>Plan</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            {% for trip in trip_planned %}
+                <td><a href="/beltexam/{{trip.id}}/trippage">{{trip.trip_name}}</a></td>
+                <td>{{trip.start_month_day_year}}</td>
+                <td>{{trip.end_month_day_year}}</td>               
+                <td>{{trip.desc}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <H3>Other User's Travel Plans</H3>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Destination</th>
+                <th>Travel Start Date</th>
+                <th>Travel End Date</th>
+                <th>Do You Want to Join?</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            {% for trip in trip_data %}
+                <td>{{trip.created_by.name}}</td>
+                <td><a href="/beltexam/{{trip.id}}/trippage">{{trip.trip_name}}</a></td> {# ifcheck to not display items created/liked by logged in user #}
+                <td>{{trip.start_month_day_year.}}</td>
+                <td>{{trip.end_month_day_year}}</td>           
+                <td><a href="/join">Join</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    <h3><a href="/create">Add Travel Plan</a></h3>
+</body>
+</html>
